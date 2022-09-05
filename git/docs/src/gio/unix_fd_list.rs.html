@@ -254,10 +254,6 @@
 <span id="181">181</span>
 <span id="182">182</span>
 <span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::UnixFDList;
@@ -287,11 +283,7 @@
     ///
     /// a new [`UnixFDList`][crate::UnixFDList]
     </span><span class="attribute">#[doc(alias = <span class="string">&quot;g_unix_fd_list_new_from_array&quot;</span>)]
-    </span><span class="kw">pub fn </span>from_array&lt;T&gt;(fds: T) -&gt; UnixFDList
-    <span class="kw">where
-        </span>T: IntoIterator,
-        T::Item: IntoRawFd,
-    {
+    </span><span class="kw">pub fn </span>from_array(fds: <span class="kw">impl </span>IntoIterator&lt;Item = <span class="kw">impl </span>IntoRawFd&gt;) -&gt; UnixFDList {
         <span class="kw">let </span>fds = fds.into_iter().map(|t| t.into_raw_fd()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
         <span class="kw">unsafe </span>{
             from_glib_full(ffi::g_unix_fd_list_new_from_array(

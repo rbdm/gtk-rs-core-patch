@@ -1609,7 +1609,7 @@
     ///
     /// Since 2.24
     </span><span class="attribute">#[doc(alias = <span class="string">&quot;g_variant_type_new_tuple&quot;</span>)]
-    </span><span class="kw">pub fn </span>new_tuple&lt;T: AsRef&lt;VariantTy&gt;, I: IntoIterator&lt;Item = T&gt;&gt;(items: I) -&gt; VariantType {
+    </span><span class="kw">pub fn </span>new_tuple(items: <span class="kw">impl </span>IntoIterator&lt;Item = <span class="kw">impl </span>AsRef&lt;VariantTy&gt;&gt;) -&gt; VariantType {
         <span class="kw">let </span><span class="kw-2">mut </span>builder = <span class="kw">crate</span>::GStringBuilder::new(<span class="string">&quot;(&quot;</span>);
 
         <span class="kw">for </span>ty <span class="kw">in </span>items {

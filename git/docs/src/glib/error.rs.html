@@ -585,8 +585,8 @@
 }
 
 <span class="kw">impl </span>BoolError {
-    <span class="kw">pub fn </span>new&lt;Msg: Into&lt;Cow&lt;<span class="lifetime">&#39;static</span>, str&gt;&gt;&gt;(
-        message: Msg,
+    <span class="kw">pub fn </span>new(
+        message: <span class="kw">impl </span>Into&lt;Cow&lt;<span class="lifetime">&#39;static</span>, str&gt;&gt;,
         filename: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
         function: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
         line: u32,
@@ -599,9 +599,9 @@
         }
     }
 
-    <span class="kw">pub fn </span>from_glib&lt;Msg: Into&lt;Cow&lt;<span class="lifetime">&#39;static</span>, str&gt;&gt;&gt;(
+    <span class="kw">pub fn </span>from_glib(
         b: ffi::gboolean,
-        message: Msg,
+        message: <span class="kw">impl </span>Into&lt;Cow&lt;<span class="lifetime">&#39;static</span>, str&gt;&gt;,
         filename: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
         function: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
         line: u32,

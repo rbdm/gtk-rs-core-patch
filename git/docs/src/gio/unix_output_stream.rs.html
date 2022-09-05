@@ -176,7 +176,7 @@
     /// on this stream. At which point you may only do so when all references to this stream have
     /// been dropped.
     </span><span class="attribute">#[doc(alias = <span class="string">&quot;g_unix_output_stream_new&quot;</span>)]
-    </span><span class="kw">pub unsafe fn </span>take_fd&lt;T: IntoRawFd&gt;(fd: T) -&gt; UnixOutputStream {
+    </span><span class="kw">pub unsafe fn </span>take_fd(fd: <span class="kw">impl </span>IntoRawFd) -&gt; UnixOutputStream {
         <span class="kw">let </span>fd = fd.into_raw_fd();
         <span class="kw">let </span>close_fd = <span class="bool-val">true</span>.into_glib();
         OutputStream::from_glib_full(ffi::g_unix_output_stream_new(fd, close_fd)).unsafe_cast()

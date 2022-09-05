@@ -1528,7 +1528,7 @@
     </span><span class="doccomment">/// Retrieves the the user data value from a field created with [`Self::new_user_data`].
     /// Returns `None` if the field was created with [`Self::new`].
     </span><span class="kw">pub fn </span>user_data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt; {
-        (<span class="self">self</span>.<span class="number">0</span>.length == <span class="number">0</span>).then(|| <span class="self">self</span>.<span class="number">0</span>.value <span class="kw">as </span>usize)
+        (<span class="self">self</span>.<span class="number">0</span>.length == <span class="number">0</span>).then_some(<span class="self">self</span>.<span class="number">0</span>.value <span class="kw">as </span>usize)
     }
 }
 

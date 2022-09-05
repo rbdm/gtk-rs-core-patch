@@ -422,6 +422,7 @@
 <span id="349">349</span>
 <span id="350">350</span>
 <span id="351">351</span>
+<span id="352">352</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 </span><span class="kw">use crate</span>::{translate::<span class="kw-2">*</span>, ConvertError, Error, GStr, GString, Slice};
@@ -539,6 +540,7 @@
 
 <span class="kw">impl </span>IConv {
     <span class="attribute">#[doc(alias = <span class="string">&quot;g_iconv_open&quot;</span>)]
+    #[allow(clippy::unnecessary_lazy_evaluations)]
     </span><span class="kw">pub fn </span>new(to_codeset: <span class="kw-2">&amp;</span>str, from_codeset: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>iconv = <span class="kw">unsafe </span>{
             ffi::g_iconv_open(to_codeset.to_glib_none().<span class="number">0</span>, from_codeset.to_glib_none().<span class="number">0</span>)

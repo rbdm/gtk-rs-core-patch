@@ -755,7 +755,7 @@
     /// a [`Socket`][crate::Socket] or [`None`] on error.
     ///  Free the returned object with `g_object_unref()`.
     </span><span class="attribute">#[cfg(any(unix, feature = <span class="string">&quot;dox&quot;</span>))]
-    </span><span class="kw">pub unsafe fn </span>from_fd&lt;T: IntoRawFd&gt;(fd: T) -&gt; <span class="prelude-ty">Result</span>&lt;Socket, glib::Error&gt; {
+    </span><span class="kw">pub unsafe fn </span>from_fd(fd: <span class="kw">impl </span>IntoRawFd) -&gt; <span class="prelude-ty">Result</span>&lt;Socket, glib::Error&gt; {
         <span class="kw">let </span>fd = fd.into_raw_fd();
         <span class="kw">let </span><span class="kw-2">mut </span>error = ptr::null_mut();
         <span class="kw">let </span>ret = ffi::g_socket_new_from_fd(fd, <span class="kw-2">&amp;mut </span>error);
@@ -766,7 +766,7 @@
         }
     }
     <span class="attribute">#[cfg(any(windows, feature = <span class="string">&quot;dox&quot;</span>))]
-    </span><span class="kw">pub unsafe fn </span>from_socket&lt;T: IntoRawSocket&gt;(socket: T) -&gt; <span class="prelude-ty">Result</span>&lt;Socket, glib::Error&gt; {
+    </span><span class="kw">pub unsafe fn </span>from_socket(socket: <span class="kw">impl </span>IntoRawSocket) -&gt; <span class="prelude-ty">Result</span>&lt;Socket, glib::Error&gt; {
         <span class="kw">let </span>socket = socket.into_raw_socket();
         <span class="kw">let </span><span class="kw-2">mut </span>error = ptr::null_mut();
         <span class="kw">let </span>ret = ffi::g_socket_new_from_fd(socket <span class="kw">as </span>i32, <span class="kw-2">&amp;mut </span>error);
