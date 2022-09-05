@@ -334,28 +334,6 @@
 <span id="261">261</span>
 <span id="262">262</span>
 <span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 </span><span class="attribute">#![allow(clippy::needless_doctest_main)]
@@ -456,37 +434,15 @@
 //!             use once_cell::sync::Lazy;
 //!             static PROPERTIES: Lazy&lt;Vec&lt;glib::ParamSpec&gt;&gt; = Lazy::new(|| {
 //!                 vec![
-//!                     glib::ParamSpecString::new(
-//!                         &quot;name&quot;,
-//!                         Some(&quot;Name&quot;),
-//!                         Some(&quot;Name of this object&quot;),
-//!                         None,
-//!                         glib::ParamFlags::READWRITE,
-//!                     ),
-//!                     glib::ParamSpecEnum::new(
-//!                         &quot;animal&quot;,
-//!                         Some(&quot;Animal&quot;),
-//!                         Some(&quot;Animal&quot;),
-//!                         Animal::static_type(),
-//!                         Animal::default() as i32,
-//!                         glib::ParamFlags::READWRITE,
-//!                     ),
-//!                     glib::ParamSpecFlags::new(
-//!                         &quot;flags&quot;,
-//!                         Some(&quot;Flags&quot;),
-//!                         Some(&quot;Flags&quot;),
-//!                         MyFlags::static_type(),
-//!                         MyFlags::default().bits(),
-//!                         glib::ParamFlags::READWRITE,
-//!                     ),
-//!                     glib::ParamSpecVariant::new(
-//!                         &quot;variant&quot;,
-//!                         Some(&quot;Variant&quot;),
-//!                         Some(&quot;Variant&quot;),
-//!                         glib::VariantTy::ANY,
-//!                         None,
-//!                         glib::ParamFlags::READWRITE,
-//!                    ),
+//!                     glib::ParamSpecString::builder(&quot;name&quot;)
+//!                         .build(),
+//!                     glib::ParamSpecEnum::builder::&lt;Animal&gt;(&quot;animal&quot;, Animal::default())
+//!                         .build(),
+//!                     glib::ParamSpecFlags::builder::&lt;MyFlags&gt;(&quot;flags&quot;)
+//!                         .default_value(MyFlags::default())
+//!                         .build(),
+//!                     glib::ParamSpecVariant::builder(&quot;variant&quot;, glib::VariantTy::ANY)
+//!                         .build(),
 //!                 ]
 //!             });
 //!
@@ -642,4 +598,4 @@
 };
 <span class="kw">pub use </span><span class="self">self</span>::types::{register_type, InitializingObject, InitializingType, TypeData};
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (84f0c3f79 2022-09-03)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>

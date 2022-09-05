@@ -680,25 +680,6 @@
 <span id="607">607</span>
 <span id="608">608</span>
 <span id="609">609</span>
-<span id="610">610</span>
-<span id="611">611</span>
-<span id="612">612</span>
-<span id="613">613</span>
-<span id="614">614</span>
-<span id="615">615</span>
-<span id="616">616</span>
-<span id="617">617</span>
-<span id="618">618</span>
-<span id="619">619</span>
-<span id="620">620</span>
-<span id="621">621</span>
-<span id="622">622</span>
-<span id="623">623</span>
-<span id="624">624</span>
-<span id="625">625</span>
-<span id="626">626</span>
-<span id="627">627</span>
-<span id="628">628</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 // rustdoc-stripper-ignore-next
@@ -942,6 +923,7 @@
     // generate the glib namespace through the crate_ident_new utility,
     // and that returns `glib` (and not `crate`) when called inside the glib crate
     </span><span class="kw">use crate as </span>glib;
+    <span class="kw">use </span><span class="kw">crate</span>::ParamSpecBuilderExt;
     <span class="kw">use </span><span class="kw">crate</span>::StaticType;
 
     <span class="kw">use </span>std::cell::RefCell;
@@ -980,34 +962,14 @@
                 <span class="kw">use </span>once_cell::sync::Lazy;
                 <span class="kw">static </span>PROPERTIES: Lazy&lt;Vec&lt;ParamSpec&gt;&gt; = Lazy::new(|| {
                     <span class="macro">vec!</span>[
-                        <span class="kw">crate</span>::ParamSpecString::new(
-                            <span class="string">&quot;name&quot;</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="kw">crate</span>::ParamFlags::READWRITE,
-                        ),
-                        <span class="kw">crate</span>::ParamSpecString::new(
-                            <span class="string">&quot;construct-name&quot;</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="kw">crate</span>::ParamFlags::READWRITE | <span class="kw">crate</span>::ParamFlags::CONSTRUCT_ONLY,
-                        ),
-                        <span class="kw">crate</span>::ParamSpecBoolean::new(
-                            <span class="string">&quot;constructed&quot;</span>,
-                            <span class="prelude-val">Some</span>(<span class="string">&quot;Constructed&quot;</span>),
-                            <span class="prelude-val">Some</span>(<span class="string">&quot;True if the constructed() virtual method was called&quot;</span>),
-                            <span class="bool-val">false</span>,
-                            <span class="kw">crate</span>::ParamFlags::READABLE,
-                        ),
-                        <span class="kw">crate</span>::ParamSpecObject::new(
-                            <span class="string">&quot;child&quot;</span>,
-                            <span class="prelude-val">Some</span>(<span class="string">&quot;Child&quot;</span>),
-                            <span class="prelude-val">Some</span>(<span class="string">&quot;Child object&quot;</span>),
-                            <span class="kw">super</span>::ChildObject::static_type(),
-                            <span class="kw">crate</span>::ParamFlags::READWRITE,
-                        ),
+                        <span class="kw">crate</span>::ParamSpecString::builder(<span class="string">&quot;name&quot;</span>).build(),
+                        <span class="kw">crate</span>::ParamSpecString::builder(<span class="string">&quot;construct-name&quot;</span>)
+                            .construct_only()
+                            .build(),
+                        <span class="kw">crate</span>::ParamSpecBoolean::builder(<span class="string">&quot;constructed&quot;</span>)
+                            .read_only()
+                            .build(),
+                        <span class="kw">crate</span>::ParamSpecObject::builder::&lt;<span class="kw">super</span>::ChildObject&gt;(<span class="string">&quot;child&quot;</span>).build(),
                     ]
                 });
 
@@ -1328,4 +1290,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (84f0c3f79 2022-09-03)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>

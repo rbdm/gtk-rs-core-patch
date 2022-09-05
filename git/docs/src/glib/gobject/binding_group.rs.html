@@ -585,14 +585,6 @@
 <span id="512">512</span>
 <span id="513">513</span>
 <span id="514">514</span>
-<span id="515">515</span>
-<span id="516">516</span>
-<span id="517">517</span>
-<span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
-<span id="521">521</span>
-<span id="522">522</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::object::ObjectRef;
@@ -1035,20 +1027,12 @@
             <span class="kw">fn </span>properties() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw">crate</span>::ParamSpec] {
                 <span class="kw">static </span>PROPERTIES: Lazy&lt;Vec&lt;<span class="kw">crate</span>::ParamSpec&gt;&gt; = Lazy::new(|| {
                     <span class="macro">vec!</span>[
-                        <span class="kw">crate</span>::ParamSpecString::new(
-                            <span class="string">&quot;name&quot;</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="kw">crate</span>::ParamFlags::READWRITE | <span class="kw">crate</span>::ParamFlags::EXPLICIT_NOTIFY,
-                        ),
-                        <span class="kw">crate</span>::ParamSpecBoolean::new(
-                            <span class="string">&quot;enabled&quot;</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="prelude-val">None</span>,
-                            <span class="bool-val">false</span>,
-                            <span class="kw">crate</span>::ParamFlags::READWRITE | <span class="kw">crate</span>::ParamFlags::EXPLICIT_NOTIFY,
-                        ),
+                        <span class="kw">crate</span>::ParamSpecString::builder(<span class="string">&quot;name&quot;</span>)
+                            .explicit_notify()
+                            .build(),
+                        <span class="kw">crate</span>::ParamSpecBoolean::builder(<span class="string">&quot;enabled&quot;</span>)
+                            .explicit_notify()
+                            .build(),
                     ]
                 });
                 PROPERTIES.as_ref()
@@ -1116,4 +1100,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (84f0c3f79 2022-09-03)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
