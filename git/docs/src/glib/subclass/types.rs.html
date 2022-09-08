@@ -1110,8 +1110,8 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::object::{Cast, IsClass, IsInterface, ObjectSubclassIs, ObjectType, ParentClassIs};
 <span class="kw">use </span><span class="kw">crate</span>::translate::<span class="kw-2">*</span>;
 <span class="kw">use crate</span>::{Closure, Object, StaticType, Type, Value};
-<span class="kw">use </span>rustc_hash::FxHashMap <span class="kw">as </span>HashMap;
 <span class="kw">use </span>std::any::Any;
+<span class="kw">use </span>std::collections::BTreeMap;
 <span class="kw">use </span>std::marker;
 <span class="kw">use </span>std::mem;
 <span class="kw">use </span>std::ptr;
@@ -1137,7 +1137,7 @@
 </span><span class="doccomment">/// Struct used for the instance private data of the GObject.
 </span><span class="kw">struct </span>PrivateStruct&lt;T: ObjectSubclass&gt; {
     imp: T,
-    instance_data: <span class="prelude-ty">Option</span>&lt;HashMap&lt;Type, Box&lt;<span class="kw">dyn </span>Any + Send + Sync&gt;&gt;&gt;,
+    instance_data: <span class="prelude-ty">Option</span>&lt;BTreeMap&lt;Type, Box&lt;<span class="kw">dyn </span>Any + Send + Sync&gt;&gt;&gt;,
 }
 
 <span class="comment">// rustdoc-stripper-ignore-next
@@ -1349,7 +1349,7 @@
 
     <span class="kw">let </span><span class="kw-2">mut </span>data = T::type_data();
     <span class="kw">if </span>data.as_ref().parent_ifaces.is_none() {
-        data.as_mut().parent_ifaces = <span class="prelude-val">Some</span>(HashMap::default());
+        data.as_mut().parent_ifaces = <span class="prelude-val">Some</span>(BTreeMap::default());
     }
     {
         <span class="kw">let </span>copy = Box::new(<span class="kw-2">*</span>iface.as_ref());
@@ -1464,9 +1464,9 @@
     <span class="attribute">#[doc(hidden)]
     </span><span class="kw">pub </span>parent_class: ffi::gpointer,
     <span class="attribute">#[doc(hidden)]
-    </span><span class="kw">pub </span>parent_ifaces: <span class="prelude-ty">Option</span>&lt;HashMap&lt;Type, ffi::gpointer&gt;&gt;,
+    </span><span class="kw">pub </span>parent_ifaces: <span class="prelude-ty">Option</span>&lt;BTreeMap&lt;Type, ffi::gpointer&gt;&gt;,
     <span class="attribute">#[doc(hidden)]
-    </span><span class="kw">pub </span>class_data: <span class="prelude-ty">Option</span>&lt;HashMap&lt;Type, Box&lt;<span class="kw">dyn </span>Any + Send + Sync&gt;&gt;&gt;,
+    </span><span class="kw">pub </span>class_data: <span class="prelude-ty">Option</span>&lt;BTreeMap&lt;Type, Box&lt;<span class="kw">dyn </span>Any + Send + Sync&gt;&gt;&gt;,
     <span class="attribute">#[doc(hidden)]
     </span><span class="kw">pub </span>private_offset: isize,
     <span class="attribute">#[doc(hidden)]
@@ -1556,7 +1556,7 @@
     /// If the class_data already contains a data for the specified `type_`.
     </span><span class="kw">pub unsafe fn </span>set_class_data&lt;T: Any + Send + Sync + <span class="lifetime">&#39;static</span>&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, type_: Type, data: T) {
         <span class="kw">if </span><span class="self">self</span>.class_data.is_none() {
-            <span class="self">self</span>.class_data = <span class="prelude-val">Some</span>(HashMap::default());
+            <span class="self">self</span>.class_data = <span class="prelude-val">Some</span>(BTreeMap::default());
         }
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>class_data) = <span class="self">self</span>.class_data {
@@ -1867,7 +1867,7 @@
             <span class="kw">let </span>priv_ = <span class="kw-2">&amp;mut *</span>ptr;
 
             <span class="kw">if </span>priv_.instance_data.is_none() {
-                priv_.instance_data = <span class="prelude-val">Some</span>(HashMap::default());
+                priv_.instance_data = <span class="prelude-val">Some</span>(BTreeMap::default());
             }
 
             <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">ref mut </span>instance_data) = priv_.instance_data {
@@ -2134,4 +2134,4 @@
     <span class="prelude-val">Some</span>(result).filter(|r| r.type_().is_valid() &amp;&amp; r.type_() != Type::UNIT)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (289279de1 2022-09-04)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>
