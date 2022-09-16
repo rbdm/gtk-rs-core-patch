@@ -4733,6 +4733,32 @@
 <span id="4660">4660</span>
 <span id="4661">4661</span>
 <span id="4662">4662</span>
+<span id="4663">4663</span>
+<span id="4664">4664</span>
+<span id="4665">4665</span>
+<span id="4666">4666</span>
+<span id="4667">4667</span>
+<span id="4668">4668</span>
+<span id="4669">4669</span>
+<span id="4670">4670</span>
+<span id="4671">4671</span>
+<span id="4672">4672</span>
+<span id="4673">4673</span>
+<span id="4674">4674</span>
+<span id="4675">4675</span>
+<span id="4676">4676</span>
+<span id="4677">4677</span>
+<span id="4678">4678</span>
+<span id="4679">4679</span>
+<span id="4680">4680</span>
+<span id="4681">4681</span>
+<span id="4682">4682</span>
+<span id="4683">4683</span>
+<span id="4684">4684</span>
+<span id="4685">4685</span>
+<span id="4686">4686</span>
+<span id="4687">4687</span>
+<span id="4688">4688</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 // rustdoc-stripper-ignore-next
@@ -5483,6 +5509,7 @@
             }
         }
 
+
         <span class="kw">impl </span>$(&lt;$(<span class="macro-nonterminal">$generic </span>$(: <span class="macro-nonterminal">$bound </span>$(+ <span class="macro-nonterminal">$bound2</span>)<span class="kw-2">*</span>)<span class="question-mark">?</span>),+&gt;)<span class="question-mark">? </span>std::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$name </span>$(&lt;$(<span class="macro-nonterminal">$generic</span>),+&gt;)<span class="question-mark">? </span>{
             <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
                 f.debug_struct(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$name</span>)).field(<span class="string">&quot;inner&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.inner).finish()
@@ -5907,6 +5934,13 @@
                 <span class="macro-nonterminal">$crate::object::Cast::upcast_ref</span>(<span class="self">self</span>)
             }
         }
+
+        <span class="attribute">#[doc(hidden)]
+        </span><span class="kw">impl </span>$(&lt;$(<span class="macro-nonterminal">$generic </span>$(: <span class="macro-nonterminal">$bound </span>$(+ <span class="macro-nonterminal">$bound2</span>)<span class="kw-2">*</span>)<span class="question-mark">?</span>),+&gt;)<span class="question-mark">? </span>std::borrow::Borrow&lt;<span class="macro-nonterminal">$super_name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>$(&lt;$(<span class="macro-nonterminal">$generic</span>),+&gt;)<span class="question-mark">? </span>{
+            <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="macro-nonterminal">$super_name </span>{
+                <span class="macro-nonterminal">$crate::object::Cast::upcast_ref</span>(<span class="self">self</span>)
+            }
+        }
     };
 
     (@munch_impls <span class="macro-nonterminal">$name</span>:ident $(&lt;$(<span class="macro-nonterminal">$generic</span>:ident $(: <span class="macro-nonterminal">$bound</span>:tt $(+ <span class="macro-nonterminal">$bound2</span>:tt)<span class="kw-2">*</span>)<span class="question-mark">?</span>),+&gt;)<span class="question-mark">?</span>, <span class="macro-nonterminal">$super_name</span>:path, $(<span class="macro-nonterminal">$implements</span>:tt)<span class="kw-2">*</span>) =&gt; {
@@ -5972,6 +6006,13 @@
         <span class="attribute">#[doc(hidden)]
         </span><span class="kw">impl </span>$(&lt;$(<span class="macro-nonterminal">$generic </span>$(: <span class="macro-nonterminal">$bound </span>$(+ <span class="macro-nonterminal">$bound2</span>)<span class="kw-2">*</span>)<span class="question-mark">?</span>),+&gt;)<span class="question-mark">? </span>AsRef&lt;<span class="macro-nonterminal">$crate::object::Object</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>$(&lt;$(<span class="macro-nonterminal">$generic</span>),+&gt;)<span class="question-mark">? </span>{
             <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="macro-nonterminal">$crate::object::Object </span>{
+                <span class="macro-nonterminal">$crate::object::Cast::upcast_ref</span>(<span class="self">self</span>)
+            }
+        }
+
+        <span class="attribute">#[doc(hidden)]
+        </span><span class="kw">impl </span>$(&lt;$(<span class="macro-nonterminal">$generic </span>$(: <span class="macro-nonterminal">$bound </span>$(+ <span class="macro-nonterminal">$bound2</span>)<span class="kw-2">*</span>)<span class="question-mark">?</span>),+&gt;)<span class="question-mark">? </span>std::borrow::Borrow&lt;<span class="macro-nonterminal">$crate::object::Object</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>$(&lt;$(<span class="macro-nonterminal">$generic</span>),+&gt;)<span class="question-mark">? </span>{
+            <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="macro-nonterminal">$crate::object::Object </span>{
                 <span class="macro-nonterminal">$crate::object::Cast::upcast_ref</span>(<span class="self">self</span>)
             }
         }
@@ -9393,6 +9434,17 @@
         <span class="kw">let </span>obj2 = v.get::&lt;<span class="kw-2">&amp;</span>Object&gt;().unwrap();
 
         <span class="macro">assert_eq!</span>(obj1.as_ptr(), obj2.as_ptr());
+    }
+
+    <span class="attribute">#[test]
+    </span><span class="kw">fn </span>test_borrow_hashing() {
+        <span class="kw">let </span><span class="kw-2">mut </span>m = std::collections::HashSet::new();
+        <span class="kw">let </span>boxed_object = <span class="kw">crate</span>::BoxedAnyObject::new(<span class="string">&quot;&quot;</span>);
+
+        m.insert(boxed_object.clone());
+
+        <span class="kw">let </span>object: <span class="kw-2">&amp;</span>Object = std::borrow::Borrow::borrow(<span class="kw-2">&amp;</span>boxed_object);
+        <span class="macro">assert_eq!</span>(m.get(object), <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>boxed_object));
     }
 }
 </code></pre></div>
