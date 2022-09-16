@@ -1753,7 +1753,7 @@
 
             <span class="attribute">#[doc(alias = <span class="string">&quot;g_task_get_cancellable&quot;</span>)]
             #[doc(alias = <span class="string">&quot;get_cancellable&quot;</span>)]
-            </span><span class="kw">pub fn </span>cancellable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cancellable {
+            </span><span class="kw">pub fn </span>cancellable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Cancellable&gt; {
                 <span class="kw">unsafe </span>{ from_glib_none(ffi::g_task_get_cancellable(<span class="self">self</span>.to_glib_none().<span class="number">0</span>)) }
             }
 
@@ -2178,4 +2178,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="gio" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="gio" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>

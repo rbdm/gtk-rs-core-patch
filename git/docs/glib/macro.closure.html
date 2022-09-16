@@ -95,7 +95,7 @@ captures are able to reference <code>Rc</code> and <code>Arc</code> values in ad
 <p><code>glib</code> needs to be in scope, so unless it’s one of the direct crate dependencies, you need to
 import it because <code>closure!</code> is using it. For example:</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">use </span>gtk::glib;</code></pre></div>
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">use </span>gtk::glib;</code></pre></div>
 <h4 id="using-as-a-closure-object"><a href="#using-as-a-closure-object">Using as a closure object</a></h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>glib_macros::closure;
 
@@ -168,4 +168,4 @@ obj.connect_closure(
 };
 <span class="comment">// `a` still kept alive, `b` is dropped
 </span><span class="macro">assert_eq!</span>(closure.invoke::&lt;String&gt;(<span class="kw-2">&amp;</span>[]), <span class="string">&quot;Hello Moon&quot;</span>);</code></pre></div>
-</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (c2804e6ec 2022-09-07)" ></div></body></html>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
