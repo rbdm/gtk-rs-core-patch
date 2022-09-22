@@ -922,10 +922,10 @@
         <span class="comment">/* Initially the data for any mime type has to be none */
         </span><span class="macro">assert!</span>(data.is_none());
 
-        <span class="macro">assert!</span>(surface.set_mime_data(MIME_TYPE_PNG, <span class="kw-2">&amp;</span>[<span class="number">1u8</span>, <span class="number">10u8</span>]).is_ok());
+        <span class="macro">assert!</span>(surface.set_mime_data(MIME_TYPE_PNG, [<span class="number">1u8</span>, <span class="number">10u8</span>]).is_ok());
         <span class="kw">let </span>data = surface.mime_data(MIME_TYPE_PNG).unwrap();
         <span class="macro">assert_eq!</span>(data, <span class="kw-2">&amp;</span>[<span class="number">1u8</span>, <span class="number">10u8</span>]);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cairo" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="cairo" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (9062b780b 2022-09-21)" ></div></body></html>

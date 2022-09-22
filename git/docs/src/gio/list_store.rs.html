@@ -517,10 +517,10 @@
         <span class="kw">let </span>item0 = ListStore::new(ListStore::static_type());
         <span class="kw">let </span>item1 = ListStore::new(ListStore::static_type());
         <span class="kw">let </span><span class="kw-2">mut </span>list = ListStore::new(ListStore::static_type());
-        list.extend(<span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>item0, <span class="kw-2">&amp;</span>item1]);
+        list.extend([<span class="kw-2">&amp;</span>item0, <span class="kw-2">&amp;</span>item1]);
         <span class="macro">assert_eq!</span>(list.item(<span class="number">0</span>).as_ref(), <span class="prelude-val">Some</span>(item0.upcast_ref()));
         <span class="macro">assert_eq!</span>(list.item(<span class="number">1</span>).as_ref(), <span class="prelude-val">Some</span>(item1.upcast_ref()));
-        list.extend(<span class="kw-2">&amp;</span>[item0.clone(), item1.clone()]);
+        list.extend([item0.clone(), item1.clone()]);
         <span class="macro">assert_eq!</span>(list.item(<span class="number">2</span>).as_ref(), <span class="prelude-val">Some</span>(item0.upcast_ref()));
         <span class="macro">assert_eq!</span>(list.item(<span class="number">3</span>).as_ref(), <span class="prelude-val">Some</span>(item1.upcast_ref()));
 
@@ -530,4 +530,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="gio" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="gio" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (9062b780b 2022-09-21)" ></div></body></html>

@@ -453,6 +453,10 @@
 <span id="380">380</span>
 <span id="381">381</span>
 <span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
 </pre><pre class="rust"><code><span class="comment">// Take a look at the license at the top of the repository in the LICENSE file.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::log <span class="kw">as </span>glib_log;
@@ -570,13 +574,21 @@
     }
 
     <span class="attribute">#[doc(alias = <span class="string">&quot;g_log&quot;</span>)]
-    </span><span class="kw">fn </span>write_log(domain: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;, level: rs_log::Level, message: <span class="kw-2">&amp;</span>str) {
+    </span><span class="kw">fn </span>write_log(domain: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;, level: rs_log::Level, message: <span class="kw-2">&amp;</span>std::fmt::Arguments&lt;<span class="lifetime">&#39;_</span>&gt;) {
         <span class="kw">unsafe </span>{
+            <span class="kw">use </span>std::fmt::Write;
+
+            <span class="kw">let </span><span class="kw-2">mut </span>message_builder = <span class="kw">crate</span>::GStringBuilder::default();
+            <span class="kw">if </span><span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>message_builder, <span class="string">&quot;{}&quot;</span>, message).is_err() {
+                <span class="kw">return</span>;
+            }
+            <span class="kw">let </span>message = message_builder.into_string();
+
             <span class="kw">crate</span>::ffi::g_log(
                 domain.to_glib_none().<span class="number">0</span>,
                 GlibLogger::level_to_glib(level).into_glib(),
                 <span class="string">b&quot;%s\0&quot;</span>.as_ptr() <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_</span>,
-                ToGlibPtr::&lt;<span class="kw-2">*const </span>std::os::raw::c_char&gt;::to_glib_none(message).<span class="number">0</span>,
+                ToGlibPtr::&lt;<span class="kw-2">*const </span>std::os::raw::c_char&gt;::to_glib_none(<span class="kw-2">&amp;</span>message).<span class="number">0</span>,
             );
         }
     }
@@ -623,30 +635,26 @@
 
         <span class="kw">match </span><span class="self">self</span>.format {
             GlibLoggerFormat::Plain =&gt; {
-                <span class="kw">let </span>args = record.args();
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(s) = args.as_str() {
-                    GlibLogger::write_log(domain, record.level(), s);
-                } <span class="kw">else </span>{
-                    GlibLogger::write_log(domain, record.level(), <span class="kw-2">&amp;</span>args.to_string());
-                }
+                GlibLogger::write_log(domain, record.level(), record.args());
             }
             GlibLoggerFormat::LineAndFile =&gt; {
                 <span class="kw">match </span>(record.file(), record.line()) {
                     (<span class="prelude-val">Some</span>(file), <span class="prelude-val">Some</span>(line)) =&gt; {
-                        <span class="kw">let </span>s = <span class="macro">format!</span>(<span class="string">&quot;{}:{}: {}&quot;</span>, file, line, record.args());
-                        GlibLogger::write_log(domain, record.level(), <span class="kw-2">&amp;</span>s);
+                        GlibLogger::write_log(
+                            domain,
+                            record.level(),
+                            <span class="kw-2">&amp;</span><span class="macro">format_args!</span>(<span class="string">&quot;{}:{}: {}&quot;</span>, file, line, record.args()),
+                        );
                     }
                     (<span class="prelude-val">Some</span>(file), <span class="prelude-val">None</span>) =&gt; {
-                        <span class="kw">let </span>s = <span class="macro">format!</span>(<span class="string">&quot;{}: {}&quot;</span>, file, record.args());
-                        GlibLogger::write_log(domain, record.level(), <span class="kw-2">&amp;</span>s);
+                        GlibLogger::write_log(
+                            domain,
+                            record.level(),
+                            <span class="kw-2">&amp;</span><span class="macro">format_args!</span>(<span class="string">&quot;{}: {}&quot;</span>, file, record.args()),
+                        );
                     }
                     <span class="kw">_ </span>=&gt; {
-                        <span class="kw">let </span>args = record.args();
-                        <span class="kw">if let </span><span class="prelude-val">Some</span>(s) = args.as_str() {
-                            GlibLogger::write_log(domain, record.level(), s);
-                        } <span class="kw">else </span>{
-                            GlibLogger::write_log(domain, record.level(), <span class="kw-2">&amp;</span>args.to_string());
-                        }
+                        GlibLogger::write_log(domain, record.level(), record.args());
                     }
                 };
             }
@@ -836,4 +844,4 @@
     )
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (cf9ed0dd5 2022-09-15)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="glib" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (9062b780b 2022-09-21)" ></div></body></html>
